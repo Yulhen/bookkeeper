@@ -1,14 +1,30 @@
 """
 Простой тестовый скрипт для терминала
 """
+import sqlite3
 
 from bookkeeper.models.category import Category
 from bookkeeper.models.expense import Expense
 from bookkeeper.repository.sqlite_repository import SQLiteRepository
 from bookkeeper.utils import read_tree
 
-cat_repo = SQLiteRepository(db_file=':memory:', cls=Category)
-exp_repo = SQLiteRepository(db_file=':memory:', cls=Expense)
+db_name = ':memory:'
+cat_repo = SQLiteRepository(db_file=db_name, cls=Category)
+exp_repo = SQLiteRepository(db_file=db_name, cls=Expense)
+
+with sqlite3.connect(db_name) as conn:
+    cur = conn.cursor()
+    cur.execute(f'CREATE TABLE category(pk INTEGER PRIMARY KEY, name TEXT NOT NULL, parent INTEGER)')
+    cur.execute(f'''
+    CREATE TABLE expense(
+        pk INTEGER PRIMARY KEY, 
+        amount INTEGER NOT NULL, 
+        category INTEGER NOT NULL,
+        expense_date DATETIME NOT NULL,
+        added_date DATETIME NOT NULL,
+        comment TEXT NOT NULL
+    )''')
+    conn.commit()
 
 cats = '''
 продукты

@@ -15,6 +15,10 @@ class Model(Protocol):  # pylint: disable=too-few-public-methods
     """
     pk: int
 
+    @classmethod
+    def from_dict(cls, data: dict) -> 'Model':
+        ...
+
 
 T = TypeVar('T', bound=Model)
 

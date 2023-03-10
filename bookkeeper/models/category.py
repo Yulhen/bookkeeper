@@ -14,10 +14,20 @@ class Category:
     Категория расходов, хранит название в атрибуте name и ссылку (id) на
     родителя (категория, подкатегорией которой является данная) в атрибуте parent.
     У категорий верхнего уровня parent = None
+
+    CREATE TABLE category (
+        pk int PRIMARY KEY,
+        parent INT NULL,
+        name TEXT NOT NULL
+    )
     """
     name: str
     parent: int | None = None
     pk: int = 0
+
+    @classmethod
+    def from_dict(cls, data: dict) -> 'Category':
+        return cls(**data)
 
     def get_parent(self,
                    repo: AbstractRepository['Category']) -> 'Category | None':

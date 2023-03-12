@@ -13,8 +13,7 @@ def custom_class():
 
 @pytest.fixture
 def repo():
-    return None
-    # return MemoryRepository()
+    return MemoryRepository()
 
 
 def test_crud(repo, custom_class):

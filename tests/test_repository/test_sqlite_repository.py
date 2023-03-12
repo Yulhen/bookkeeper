@@ -13,6 +13,9 @@ def custom_class():
         pk: int = 0
         name: str = "name"
 
+        @classmethod
+        def from_dict(cls, data): return cls(**data)
+
     return Custom
 
 
@@ -38,7 +41,7 @@ def repo(custom_class):
 
 def test_crud(repo, custom_class):
     obj = custom_class()
-    obj.pk = None
+    obj.pk = 0
     pk = repo.add(obj)
     assert obj.pk == pk
     assert repo.get(pk) == obj
@@ -77,7 +80,7 @@ def test_cannot_update_without_pk(repo, custom_class):
 def test_get_all(repo, custom_class):
     objects = [custom_class() for i in range(5)]
     for o in objects:
-        o.pk = None
+        o.pk = 0
         repo.add(o)
     assert repo.get_all() == objects
 

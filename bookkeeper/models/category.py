@@ -21,16 +21,16 @@ class Category:
         name TEXT NOT NULL
     )
     """
+
     name: str
     parent: int | None = None
     pk: int = 0
 
     @classmethod
-    def from_dict(cls, data: dict) -> 'Category':
+    def from_dict(cls, data: dict) -> "Category":
         return cls(**data)
 
-    def get_parent(self,
-                   repo: AbstractRepository['Category']) -> 'Category | None':
+    def get_parent(self, repo: AbstractRepository["Category"]) -> "Category | None":
         """
         Получить родительскую категорию в виде объекта Category
         Если метод вызван у категории верхнего уровня, возвращает None
@@ -47,9 +47,9 @@ class Category:
             return None
         return repo.get(self.parent)
 
-    def get_all_parents(self,
-                        repo: AbstractRepository['Category']
-                        ) -> Iterator['Category']:
+    def get_all_parents(
+        self, repo: AbstractRepository["Category"]
+    ) -> Iterator["Category"]:
         """
         Получить все категории верхнего уровня в иерархии.
 
@@ -67,9 +67,9 @@ class Category:
         yield parent
         yield from parent.get_all_parents(repo)
 
-    def get_subcategories(self,
-                          repo: AbstractRepository['Category']
-                          ) -> Iterator['Category']:
+    def get_subcategories(
+        self, repo: AbstractRepository["Category"]
+    ) -> Iterator["Category"]:
         """
         Получить все подкатегории из иерархии, т.е. непосредственные
         подкатегории данной, все их подкатегории и т.д.
@@ -83,9 +83,10 @@ class Category:
         Объекты Category, являющиеся подкатегориями разного уровня ниже данной.
         """
 
-        def get_children(graph: dict[int | None, list['Category']],
-                         root: int) -> Iterator['Category']:
-            """ dfs in graph from root """
+        def get_children(
+            graph: dict[int | None, list["Category"]], root: int
+        ) -> Iterator["Category"]:
+            """dfs in graph from root"""
             for x in graph[root]:
                 yield x
                 yield from get_children(graph, x.pk)
@@ -97,9 +98,8 @@ class Category:
 
     @classmethod
     def create_from_tree(
-            cls,
-            tree: list[tuple[str, str | None]],
-            repo: AbstractRepository['Category']) -> list['Category']:
+        cls, tree: list[tuple[str, str | None]], repo: AbstractRepository["Category"]
+    ) -> list["Category"]:
         """
         Создать дерево категорий из списка пар "потомок-родитель".
         Список должен быть топологически отсортирован, т.е. потомки

@@ -1,5 +1,4 @@
 from bookkeeper.repository.sqlite_repository import SQLiteRepository
-from bookkeeper.repository.memory_repository import MemoryRepository
 from bookkeeper.repository.abstract_repository import AbstractRepository
 
 from bookkeeper.models.category import Category
@@ -8,14 +7,12 @@ from bookkeeper.models.budget import Budget
 
 
 class RepositoryFactory:
-
     @staticmethod
     def get_repository(cls: type, **kwargs) -> AbstractRepository:
-        return SQLiteRepository(cls=cls, db_file=kwargs.get('db_file'))
+        return SQLiteRepository(cls=cls, db_file=kwargs.get("db_file"))
 
 
 class ObjectManager:
-
     def __init__(self, **kwargs):
         self.kwargs = kwargs
 

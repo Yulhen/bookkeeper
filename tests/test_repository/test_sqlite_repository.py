@@ -11,26 +11,28 @@ def custom_class():
     @dataclass
     class Custom:
         pk: int = 0
-        name: str = 'name'
+        name: str = "name"
 
     return Custom
 
 
 @pytest.fixture
 def repo(custom_class):
-    db_file = 'db_test.db'
+    db_file = "db_test.db"
     repo = SQLiteRepository(db_file=db_file, cls=custom_class)
 
     with sqlite3.connect(db_file) as con:
         c = con.cursor()
-        c.execute(f'create table if not exists {repo.table_name} (pk INTEGER primary key, name TEXT)')
+        c.execute(
+            f"create table if not exists {repo.table_name} (pk INTEGER primary key, name TEXT)"
+        )
         con.commit()
 
     yield repo
 
     with sqlite3.connect(db_file) as con:
         c = con.cursor()
-        c.execute(f'drop table {repo.table_name}')
+        c.execute(f"drop table {repo.table_name}")
         con.commit()
 
 
@@ -87,4 +89,4 @@ def test_get_all_with_condition(repo, custom_class):
         o.name = str(i)
         repo.add(o)
         objects.append(o)
-    assert repo.get_all({'name': '0'}) == [objects[0]]
+    assert repo.get_all({"name": "0"}) == [objects[0]]

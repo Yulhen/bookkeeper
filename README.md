@@ -1,6 +1,17 @@
 # Простая программа для управления личными финансами
 #### (учебный проект для курса по практике программирования на Python)
 
+# Запуск
+```bash
+git clone https://github.com/Yulhen/bookkeeper.git
+cd bookkeeper                       
+python3 -m venv venv                 # создать виртуальное окружение
+. .\venv\Scripts\activate            # активировать виртуальное окружение
+pip install -r requirements.txt      # установка зависимостей
+python -m bookkeeper.view.interface  # запуск приложения
+python -m pytest .\tests\test_interface\test_interface.py  # тесты интерфейса
+```
+
 [Техническое задание](specification.md)
 
 Архитектура проекта строится на принципе инверсии зависимостей. Упрощенная схема

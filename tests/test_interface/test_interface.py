@@ -9,7 +9,7 @@ import pytest
 
 @pytest.fixture
 def db_file():
-    db_file = "test_tmp.db"
+    db_file = "static/test_tmp.db"
 
     with sqlite3.connect(db_file) as con:
         c = con.cursor()

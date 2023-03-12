@@ -13,7 +13,7 @@ from bookkeeper.view.widgets.expense_table import ExpensesTableView
 
 STYLESHEET = """
     QMainWindow {
-        background-image: url("koteki.png"); 
+        background-image: url("static/koteki.png"); 
         background-repeat: no-repeat; 
         background-position: center;
     }
@@ -22,7 +22,7 @@ STYLESHEET = """
 
 class MainWindow(QtWidgets.QMainWindow):
     WINDOW_TITLE = "Финансовый помощник"
-    DB_FILE = "bookkeeper.db"
+    DB_FILE = "static/bookkeeper.db"
 
     def __init__(self):
         super(MainWindow, self).__init__()

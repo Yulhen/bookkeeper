@@ -15,10 +15,10 @@ exp_repo = SQLiteRepository(db_file=db_name, cls=Expense)
 with sqlite3.connect(db_name) as conn:
     cur = conn.cursor()
     cur.execute(
-        f"CREATE TABLE category(pk INTEGER PRIMARY KEY, name TEXT NOT NULL, parent INTEGER)"
+        "CREATE TABLE category(pk INTEGER PRIMARY KEY, name TEXT NOT NULL, parent INTEGER)"
     )
     cur.execute(
-        f"""
+        """
     CREATE TABLE expense(
         pk INTEGER PRIMARY KEY, 
         amount INTEGER NOT NULL, 

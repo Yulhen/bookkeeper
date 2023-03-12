@@ -25,7 +25,7 @@ class MainWindow(QtWidgets.QMainWindow):
     DB_FILE = "static/bookkeeper.db"
 
     def __init__(self):
-        super(MainWindow, self).__init__()
+        super().__init__()
 
         self.db = ObjectManager(db_file=self.DB_FILE)
 

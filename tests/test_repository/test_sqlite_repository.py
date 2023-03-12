@@ -14,7 +14,8 @@ def custom_class():
         name: str = "name"
 
         @classmethod
-        def from_dict(cls, data): return cls(**data)
+        def from_dict(cls, data):
+            return cls(**data)
 
     return Custom
 

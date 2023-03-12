@@ -2,12 +2,8 @@
 Модель категории расходов
 """
 from enum import Enum
-from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Iterator
-
-from ..repository.abstract_repository import AbstractRepository
 
 
 class BudgetType(str, Enum):

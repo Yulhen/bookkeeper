@@ -1,5 +1,3 @@
-import abc
-
 from PySide6 import QtWidgets
 
 

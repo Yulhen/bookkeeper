@@ -72,7 +72,7 @@ class SQLiteRepository(AbstractRepository[T]):
     def _escape_update_value(cls, value: Any) -> str:
         if isinstance(value, datetime):
             return f"DATETIME('{str(value)}')"
-        elif isinstance(value, str):
+        if isinstance(value, str):
             return f"'{value}'"
         return str(value)
 
